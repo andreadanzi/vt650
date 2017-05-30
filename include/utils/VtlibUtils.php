@@ -608,7 +608,7 @@ $__htmlpurifier_instance = false;
  * @return String
  */
 function vtlib_purify($input, $ignore=false) {
-	global $__htmlpurifier_instance, $root_directory, $default_charset;
+	global $__htmlpurifier_instance, $root_directory, $default_charset, $log;
 
 	static $purified_cache = array();
     $value = $input;
@@ -637,7 +637,51 @@ function vtlib_purify($input, $ignore=false) {
 	    	$config->set('Core', 'Encoding', $use_charset);
 	    	$config->set('Cache', 'SerializerPath', "$use_root_directory/test/vtlib");
 
-			$__htmlpurifier_instance = new HTMLPurifier($config);
+	    	// danzi.tn@20170308 embed HTML5 and other nice stuff
+        	// HTML5
+		$log->debug("vtlib_purify danzi.tn@20170308");
+	        $config->set('HTML.Doctype', 'HTML 4.01 Transitional');
+            	$config->set('CSS.AllowTricky', true);
+	        $config->set('Cache.SerializerPath', '/tmp');
+        	//embed
+            	$config->set('HTML.SafeEmbed',true);
+            	$config->set('HTML.SafeObject',true);
+            	// Allow iframes from:
+            	// o YouTube.com
+            	// o Vimeo.com
+            	$config->set('HTML.SafeIframe', true);
+            	$config->set('URI.SafeIframeRegexp', '%^(http:|https:)?//(www.youtube(?:-nocookie)?.com/embed/|player.vimeo.com/video/)%');
+            	$config->set('HTML.Allowed', implode(',', $allowed));
+           	// Set some HTML5 properties
+            	$config->set('HTML.DefinitionID', 'html5-definitions'); // unqiue id
+            	$config->set('HTML.DefinitionRev', 1);
+
+		$log->debug("vtlib_purify danzi.tn@20170308 before maybeGetRawHTMLDefinition");
+		/* skip
+		$def = $config->maybeGetRawHTMLDefinition();
+		
+		$log->debug("vtlib_purify danzi.tn@20170308 maybeGetRawHTMLDefinition def=".$def);
+		if ($def) {
+		    // http://developers.whatwg.org/the-video-element.html#the-video-element
+		    $def->addElement('video', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', array(
+		      'src' => 'URI',
+		      'type' => 'Text',
+		      'width' => 'Length',
+		      'height' => 'Length',
+		      'poster' => 'URI',
+		      'preload' => 'Enum#auto,metadata,none',
+		      'controls' => 'Bool',
+		    ));
+		    $def->addElement('source', 'Block', 'Flow', 'Common', array(
+		      'src' => 'URI',
+		      'type' => 'Text',
+		    ));
+		}
+		*/
+		// danzi.tn@20170308
+		$log->debug("vtlib_purify danzi.tn@20170308 end");
+
+		$__htmlpurifier_instance = new HTMLPurifier($config);
 		}
 		if($__htmlpurifier_instance) {
 			// Composite type
