@@ -38,9 +38,9 @@ $languageStrings = array(
 	'Modified Time'	=>	"Tempo Modified",
 	'description'	=>	"Descrizione",
 	'Assigned To'	=>	"Assegnato a",
-	'Open'	=>	"Aprire",
+	'Open'	=>	"Aperto",
 	'In Progress'	=>	"In Progress",
 	'Completed'	=>	"Completato",
-	'Deferred'	=>	"Differite",
+	'Deferred'	=>	"Differito",
 	'Canceled'	=>	"Cancellato",
 );
