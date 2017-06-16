@@ -1,1 +1,5 @@
 #Start 2017/05/30
+
+## [none]
+### Changed
+	- Fix #1 - Enable Multiple Mailboxes
