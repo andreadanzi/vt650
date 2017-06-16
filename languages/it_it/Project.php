@@ -43,12 +43,12 @@ $languageStrings = array(
     'LBL_SELECT_PROGRESS'          => 'Selezionare Progress'        ,
 	
 	//picklist values
-	'prospecting' => 'Prospezione',
+	'prospecting' => 'In Prospettiva',
     'in progress' => 'In Progress',
     'initiated' => 'Avviato',
-	'waiting for feedback' => 'In attesa di un commento',
+	'waiting for feedback' => 'In attesa di feedback',
     'on hold' => 'In attesa',
-    'archived' => 'Archiviati',
+    'archived' => 'Archiviato',
     'completed' => 'Completato',
     'delivered' => 'Consegnato',
 	'administrative' => 'Amministrativo',
