@@ -65,9 +65,10 @@ function customProjectFromTemplate($entity){
 		    $tStart = strtotime($templateStartdate);
 		    $targetenddate = $templateFocus->column_fields["targetenddate"];
 		    $curTargetenddate = $currentFocus->column_fields['targetenddate'];
-		    if( !empty($targetenddate) && empty($curTargetenddate) ) {
+		    if( !empty($targetenddate) ) {
     		    $rTarget = strtotime($targetenddate);
-		        $currentFocus->column_fields['targetenddate'] = date("Y-m-d", $pStart + ( $tStart - $rTarget ) );
+    		    $newTarget = $pStart + ($rTarget - $tStart);
+		        $currentFocus->column_fields['targetenddate'] = date("Y-m-d",$newTarget);
 		    }
 		    $log->debug("customProjectFromTemplate.templateFieldList column_names = ".print_r($column_names,True));
 		    $relatedQuery = "SELECT
