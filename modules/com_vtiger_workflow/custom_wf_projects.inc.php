@@ -63,6 +63,12 @@ function customProjectFromTemplate($entity){
 		    $log->debug("customProjectFromTemplate: templateStartdate=".$templateStartdate." type is ".gettype($templateStartdate));
 		    $pStart = strtotime($projectStartdate);
 		    $tStart = strtotime($templateStartdate);
+		    $targetenddate = $templateFocus->column_fields["targetenddate"];
+		    $curTargetenddate = $currentFocus->column_fields['targetenddate'];
+		    if( !empty($targetenddate) && empty($curTargetenddate) ) {
+    		    $rTarget = strtotime($targetenddate);
+		        $currentFocus->column_fields['targetenddate'] = date("Y-m-d", $pStart + ( $tStart - $rTarget ) );
+		    }
 		    $log->debug("customProjectFromTemplate.templateFieldList column_names = ".print_r($column_names,True));
 		    $relatedQuery = "SELECT
                                 vtiger_crmentityrel.relcrmid,
