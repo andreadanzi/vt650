@@ -118,13 +118,13 @@ function customProjectFromTemplate($entity){
         		    $relStartDate = $relatedFocus->column_fields['startdate'];
         		    if( !empty($relStartDate) && !empty($templateStartdate) ) {
 		                $rStart = strtotime($relStartDate);
-		                $newStart = $pStart + ( $tStart - $rStart );
+		                $newStart = $pStart + ( $rStart - $tStart );
             		    $newRelated->column_fields['startdate'] = date("Y-m-d",$newStart);
         		    }
         		    $relEndDate = $relatedFocus->column_fields['enddate'];
                     if( !empty($relEndDate) && !empty($templateStartdate) ) {
 		                $rEnd = strtotime($relEndDate);
-       		            $newEnd = $pStart + ( $tStart - $rEnd );
+       		            $newEnd = $pStart + ( $rEnd - $tStart );
             		    $newRelated->column_fields['enddate'] = date("Y-m-d",$newEnd);
         		    }
         		    $log->debug("customProjectFromTemplate: relStartDate=".$relStartDate." type is ".gettype($relStartDate));
@@ -134,7 +134,7 @@ function customProjectFromTemplate($entity){
         		    $relMilestonedate = $newRelated->column_fields['projectmilestonedate'];
         		    if( !empty($relMilestonedate) && !empty($templateStartdate)) {
 		                $mEnd = strtotime($relMilestonedate);
-       		            $newM = $pStart + ( $tStart - $mEnd );
+       		            $newM = $pStart + ( $mEnd - $tStart );
             		    $newRelated->column_fields['projectmilestonedate'] = date("Y-m-d",$newM);
         		    }
                 }
