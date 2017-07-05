@@ -59,6 +59,7 @@ function customProjectFromTemplate($entity){
 		    // set dates accordingly to..
 		    
 		    $projectStartdate = $currentFocus->column_fields["startdate"];
+		    $projectEnddate = $currentFocus->column_fields["targetenddate"];
 		    $templateStartdate = $templateFocus->column_fields["startdate"];
 		    $log->debug("customProjectFromTemplate: templateStartdate=".$templateStartdate." type is ".gettype($templateStartdate));
 		    $pStart = strtotime($projectStartdate);
@@ -67,8 +68,16 @@ function customProjectFromTemplate($entity){
 		    $curTargetenddate = $currentFocus->column_fields['targetenddate'];
 		    if( !empty($targetenddate) ) {
     		    $rTarget = strtotime($targetenddate);
-    		    $newTarget = $pStart + ($rTarget - $tStart);
-		        $currentFocus->column_fields['targetenddate'] = date("Y-m-d",$newTarget);
+    		    $projectDuration = $rTarget - $tStart;
+    		    if( empty($projectStartdate) && !empty($projectEnddate)  ) {
+    		        $pEnd = strtotime($projectEnddate);
+    		        $pStart = $pEnd - $projectDuration;   
+    		        $projectStartdate = date("Y-m-d",$pStart);
+	    	        $currentFocus->column_fields['startdate'] = $projectStartdate;
+    		    } else {
+        		    $newTarget = $pStart + $projectDuration;
+	    	        $currentFocus->column_fields['targetenddate'] = date("Y-m-d",$newTarget);
+    	        }
 		    }
 		    $log->debug("customProjectFromTemplate.templateFieldList column_names = ".print_r($column_names,True));
 		    $relatedQuery = "SELECT
