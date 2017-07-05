@@ -61,7 +61,8 @@ function customProjectFromTemplate($entity){
 		    $projectStartdate = $currentFocus->column_fields["startdate"];
 		    $templateStartdate = $templateFocus->column_fields["startdate"];
 		    $log->debug("customProjectFromTemplate: templateStartdate=".$templateStartdate." type is ".gettype($templateStartdate));
-		    
+		    $pStart = strtotime($projectStartdate);
+		    $tStart = strtotime($templateStartdate);
 		    $log->debug("customProjectFromTemplate.templateFieldList column_names = ".print_r($column_names,True));
 		    $relatedQuery = "SELECT
                                 vtiger_crmentityrel.relcrmid,
@@ -97,16 +98,29 @@ function customProjectFromTemplate($entity){
         		$newRelated->column_fields['projectid'] = $projectId;
         		// ProjectTask startdate, enddate
         		if($row['relmodule']=='ProjectTask') {
+                
         		    $relStartDate = $relatedFocus->column_fields['startdate'];
+        		    if( !empty($relStartDate) && !empty($templateStartdate) ) {
+		                $rStart = strtotime($relStartDate);
+		                $newStart = $pStart + ( $tStart - $rStart );
+            		    $newRelated->column_fields['startdate'] = date("Y-m-d",$newStart);
+        		    }
         		    $relEndDate = $relatedFocus->column_fields['enddate'];
-        		    // $newRelated->column_fields['startdate'] = $projectStartdate;
-        		    // $newRelated->column_fields['enddate'] = $projectStartdate;
+                    if( !empty($relEndDate) && !empty($templateStartdate) ) {
+		                $rEnd = strtotime($relEndDate);
+       		            $newEnd = $pStart + ( $rEnd - $rStart );
+            		    $newRelated->column_fields['enddate'] = date("Y-m-d",$newEnd);
+        		    }
         		    $log->debug("customProjectFromTemplate: relStartDate=".$relStartDate." type is ".gettype($relStartDate));
                 }
         		// ProjectMilestone projectmilestonedate
         		if($row['relmodule']=='ProjectMilestone') {
         		    $relMilestonedate = $newRelated->column_fields['projectmilestonedate'];
-        		    // $newRelated->column_fields['projectmilestonedate'] = $projectStartdate;
+        		    if( !empty($relMilestonedate) && !empty($templateStartdate)) {
+		                $mEnd = strtotime($relMilestonedate);
+       		            $newEnd = $pStart + ( $rEnd - $mEnd );
+            		    $newRelated->column_fields['projectmilestonedate'] = date("Y-m-d",$newEnd);
+        		    }
                 }
         		$newRelated->save($module_name=$row['relmodule']);
         		$currentFocus->save_related_module('Project',$projectId,$row['relmodule'],$newRelated->id);
