@@ -3,7 +3,12 @@ require_once('include/database/PearDatabase.php');
 require_once 'include/utils/utils.php';
 // danzi.tn#9 - 20170705 - custom function for project creation based on template
 
-
+/*
+TABID
+-- 42 Project
+-- 40 ProjectMilestones
+-- 41 ProjectTask
+*/
 function customProjectFromTemplate($entity){
     include('dnz.config.php');
 	global $adb, $log;
@@ -51,6 +56,12 @@ function customProjectFromTemplate($entity){
                     }
 			       		       
 		    }
+		    // set dates accordingly to..
+		    
+		    $projectStartdate = $currentFocus->column_fields["startdate"];
+		    $templateStartdate = $templateFocus->column_fields["startdate"];
+		    $log->debug("customProjectFromTemplate: templateStartdate=".$templateStartdate." type is ".gettype($templateStartdate));
+		    
 		    $log->debug("customProjectFromTemplate.templateFieldList column_names = ".print_r($column_names,True));
 		    $relatedQuery = "SELECT
                                 vtiger_crmentityrel.relcrmid,
@@ -84,6 +95,19 @@ function customProjectFromTemplate($entity){
         		$newRelated->column_fields['modifiedtime'] = $currentFocus->column_fields['modifiedtime'];
         		$newRelated->column_fields['modifiedby'] = $currentFocus->column_fields['modifiedby'];
         		$newRelated->column_fields['projectid'] = $projectId;
+        		// ProjectTask startdate, enddate
+        		if($row['relmodule']=='ProjectTask') {
+        		    $relStartDate = $relatedFocus->column_fields['startdate'];
+        		    $relEndDate = $relatedFocus->column_fields['enddate'];
+        		    // $newRelated->column_fields['startdate'] = $projectStartdate;
+        		    // $newRelated->column_fields['enddate'] = $projectStartdate;
+        		    $log->debug("customProjectFromTemplate: relStartDate=".$relStartDate." type is ".gettype($relStartDate));
+                }
+        		// ProjectMilestone projectmilestonedate
+        		if($row['relmodule']=='ProjectMilestone') {
+        		    $relMilestonedate = $newRelated->column_fields['projectmilestonedate'];
+        		    // $newRelated->column_fields['projectmilestonedate'] = $projectStartdate;
+                }
         		$newRelated->save($module_name=$row['relmodule']);
         		$currentFocus->save_related_module('Project',$projectId,$row['relmodule'],$newRelated->id);
 		    }
