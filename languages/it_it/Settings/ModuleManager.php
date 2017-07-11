@@ -8,7 +8,7 @@
  * All Rights Reserved.
  ************************************************************************************/
 $languageStrings = array(
-	'LBL_IMPORT_MODULE'            => 'Import Module'               , // TODO: Review
+	'LBL_IMPORT_MODULE'            => 'Importa Modulo'               , // TODO: Review
 	'LBL_VTIGER_EXTENSION_STORE'   => 'Vtiger Extension Store'      , // TODO: Review
 	'LBL_PUBLISHER'                => 'Publisher'                   , // TODO: Review
 	'LBL_LICENSE'                  => 'License'                     , // TODO: Review

@@ -8,10 +8,10 @@
  * All Rights Reserved.
  ************************************************************************************/
 $languageStrings = array(
-	'Potentials'                   => 'Opportunita\''               , 
+	'Potentials'                   => 'Opportunit&agrave;'               , 
 	'SINGLE_Potentials'            => 'Opportunit&agrave;'          , 
-	'LBL_ADD_RECORD'               => 'Nuova Opportunità'             , 
-	'LBL_RECORDS_LIST'             => 'Elenco Opportunità'          , 
+	'LBL_ADD_RECORD'               => 'Nuova Opportunit&agrave;'             , 
+	'LBL_RECORDS_LIST'             => 'Elenco Opportunit&agrave;'          , 
 	'LBL_OPPORTUNITY_INFORMATION'  => 'Informazioni Opportunit&agrave;', 
 	'Potential No'                 => 'No. Opportunit&agrave;'      , 
 	'Amount'                       => 'Valore Attuale'                   , 
@@ -21,9 +21,9 @@ $languageStrings = array(
 	'Campaign Source'              => 'Fonte Campagna'              , 
 	'Forecast Amount'              => 'Valore Previsto'             , 
 	'Funnel'                       => 'Sales Funnel'                , 
-	'Potentials by Stage'          => 'Opportunità per Statoe'      , 
+	'Potentials by Stage'          => 'Opportunit&agrave; per Stato'      , 
 	'Total Revenue'                => 'Totale Ricavi'      , 
-	'Top Potentials'               => 'Opportunità Migliori'           , 
+	'Top Potentials'               => 'Opportunit&agrave; Migliori'           , 
 	'Forecast'                     => 'Previsione Vendite'              , 
 	'Prospecting'                  => 'In Prospettiva'              , 
 	'Qualification'                => 'Qualificazione'              , 
@@ -41,5 +41,5 @@ $languageStrings = array(
 	'LBL_EXPECTED_CLOSE_DATE_ON'   => 'Data chiusura prevista'        , 
 	'LBL_RELATED_CONTACTS'         => 'Contatti collegati'            , // TODO: Review
 	'LBL_RELATED_PRODUCTS'         => 'Prodotti collegati'            , // TODO: Review
-        'Potentials Won'               => 'Potenziali Vinti',
+        'Potentials Won'               => 'Opportunit&agrave; vinte',
 );

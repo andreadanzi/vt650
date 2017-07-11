@@ -8,29 +8,29 @@
  * All Rights Reserved.
  ************************************************************************************/
 $languageStrings = array(
-	'Accounts'                     => 'Organizations & Contacts'    , // TODO: Review
+	'Accounts'                     => 'Clienti & Contatti'    , // TODO: Review
 	'LBL_ADD_CUSTOM_RULE'          => 'Aggiungi regola privilegio personalizzata', 
-	'Read Only'                    => 'R'                           , 
-	'Read Write'                   => 'R+W'                         , 
-	'LBL_ADD_CUSTOM_RULE_TO'       => 'Add Custom Rule to'          , // TODO: Review
+	'Read Only'                    => 'Solo lettura'                           , 
+	'Read Write'                   => 'Lettura + Scrittura'                         , 
+	'LBL_ADD_CUSTOM_RULE_TO'       => 'Aggiungi regola personalizzata a'          , // TODO: Review
 	'LBL_CAN_ACCESSED_BY'          => 'accessibile da'              , 
 	'LBL_PRIVILEGES'               => 'Privilegi'                   , 
-	'LBL_SHARING_RULE'             => 'Sharing Rules'               , 
+	'LBL_SHARING_RULE'             => 'Regole di condivisione'               , 
 	'LBL_RULE_NO'                  => 'Numero regola'               , 
-	'LBL_MODULE'                   => 'Module'                      , // TODO: Review
-	'LBL_ADVANCED_SHARING_RULES'   => 'Advanced Sharing Rules'      , // TODO: Review
-	'LBL_WITH_PERMISSIONS'         => 'With Permissions'            , // TODO: Review
-	'LBL_APPLY_NEW_SHARING_RULES'  => 'Apply New Sharing Rules'     , // TODO: Review
-	'LBL_READ'                     => 'Read'                        , // TODO: Review
-	'LBL_READ_WRITE'               => 'Read and Write'              , // TODO: Review
-	'LBL_CUSTOM_ACCESS_MESG'       => 'No Custom Access Rules defined', // TODO: Review
-	'SINGLE_Groups'                => 'Group'                       , // TODO: Review
-	'SINGLE_Roles'                 => 'Role'                        , // TODO: Review
-	'SINGLE_RoleAndSubordinates'   => 'RoleAndSubordinate'          , // TODO: Review
+	'LBL_MODULE'                   => 'Modulo'                      , // TODO: Review
+	'LBL_ADVANCED_SHARING_RULES'   => 'Regole di condivisione avanzate'      , // TODO: Review
+	'LBL_WITH_PERMISSIONS'         => 'Con permessi'            , // TODO: Review
+	'LBL_APPLY_NEW_SHARING_RULES'  => 'Applica nuova regola di condivisione'     , // TODO: Review
+	'LBL_READ'                     => 'Lettura'                        , // TODO: Review
+	'LBL_READ_WRITE'               => 'Lettura e Scrittura'              , // TODO: Review
+	'LBL_CUSTOM_ACCESS_MESG'       => 'Nessana regola di accesso personalizzata presente', // TODO: Review
+	'SINGLE_Groups'                => 'Gruppi'                       , // TODO: Review
+	'SINGLE_Roles'                 => 'Ruoli'                        , // TODO: Review
+	'SINGLE_RoleAndSubordinates'   => 'Ruoli e Subordinati'          , // TODO: Review
 );
 $jsLanguageStrings = array(
-	'JS_CUSTOM_RULE_SAVED_SUCCESSFULLY' => 'Custom Sharing Rule Saved Successfully', // TODO: Review
-	'JS_SELECT_ANY_OTHER_ACCESSING_USER' => 'Select any other accessing user', // TODO: Review
-	'JS_NEW_SHARING_RULES_APPLIED_SUCCESSFULLY' => 'New Sharing Rules Applied Successfully', // TODO: Review
-	'JS_DEPENDENT_PRIVILEGES_SHOULD_CHANGE' => 'Opportunities, Tickets, Quotes, SalesOrder & Invoice Access must be set to Private when the Organization Access is set to Private', // TODO: Review
+	'JS_CUSTOM_RULE_SAVED_SUCCESSFULLY' => 'Regole di condivisione personalizzate salvate con successo', // TODO: Review
+	'JS_SELECT_ANY_OTHER_ACCESSING_USER' => 'Seleziona qualsiasi altro utente per accesso', // TODO: Review
+	'JS_NEW_SHARING_RULES_APPLIED_SUCCESSFULLY' => 'Regoala di condivisione personalizzata applicata con successo', // TODO: Review
+	'JS_DEPENDENT_PRIVILEGES_SHOULD_CHANGE' => 'L accesso a Opportunit&agrave;, Tickets, Offerte, Ordini di Vendita. Fatture deve essere impostato a Privato quando l&rsquo;accesso ai Clienti &egrave; Privato', // TODO: Review
 );

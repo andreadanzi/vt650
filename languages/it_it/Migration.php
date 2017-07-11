@@ -8,8 +8,8 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'LBL_VTIGER_MIGRATION' => 'Benvenuti in materia di migrazione Vtiger',
-	'LBL_MIGRATION_COMPLETED' => 'Migrazione Completato',
+	'LBL_VTIGER_MIGRATION' => 'Benvenuti in ambiente di migrazione Vtiger',
+	'LBL_MIGRATION_COMPLETED' => 'Migrazione Completata',
 	'LBL_MIGRATION_WIZARD' => 'Migrazione guidata',
 	'LBL_PRIDE_BEING_ASSOCIATED' => 'Siamo orgogliosi di essere associati con voi.',
 	'LBL_TALK_TO_US_AT_FORUMS' => 'Hai delle domande? Trova aiuto su Vtiger <a href="http://forums.vtiger.com" target="_blank"> Discussioni </a><br>',

@@ -8,16 +8,16 @@
  * All Rights Reserved.
  ************************************************************************************/
 $languageStrings = array(
-	'LBL_SEND_SMS_TO_SELECTED_NUMBERS' => 'Send SMS to the selected numbers',
+	'LBL_SEND_SMS_TO_SELECTED_NUMBERS' => 'Invia SMS al numero selezionato',
 	'LBL_STEP_1'                   => 'Step 1'                      ,
 	'LBL_STEP_2'                   => 'Step 2'                      ,
-	'LBL_SELECT_THE_PHONE_NUMBER_FIELDS_TO_SEND' => 'Select the phone number fields to send',
-	'LBL_TYPE_THE_MESSAGE'         => 'Type the message'            ,
-	'LBL_WRITE_YOUR_MESSAGE_HERE'  => 'write your message here'     ,
-	'LBL_ADD_MORE_FIELDS'          => 'Add more fields'             ,
-	'LBL_SERVER_CONFIG'           => 'Server Configuration'        ,
-	'LBL_CHECK_STATUS'             => 'Check Status'                ,
-	'message'                      => 'Message'                     ,
-	'LBL_SMSNOTIFIER_INFORMATION'  => 'SMS Information'             ,
-	'SINGLE_SMSNotifier'           => 'SMS Notifier'                , // TODO: Review
+	'LBL_SELECT_THE_PHONE_NUMBER_FIELDS_TO_SEND' => 'Scegli i numeri a cui inviare',
+	'LBL_TYPE_THE_MESSAGE'         => 'Digita il messaggio'            ,
+	'LBL_WRITE_YOUR_MESSAGE_HERE'  => 'Scrivi il tuo messaggio qui'     ,
+	'LBL_ADD_MORE_FIELDS'          => 'Aggiungi pi&ugrave; campi qui'             ,
+	'LBL_SERVER_CONFIG'           => 'Configurazione Server'        ,
+	'LBL_CHECK_STATUS'             => 'Controlla stato'                ,
+	'message'                      => 'Messaggio'                     ,
+	'LBL_SMSNOTIFIER_INFORMATION'  => 'Informazioni SMS'             ,
+	'SINGLE_SMSNotifier'           => 'Notifica SMS'                , // TODO: Review
 );

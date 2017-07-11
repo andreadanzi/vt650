@@ -8,15 +8,15 @@
  * All Rights Reserved.
  ************************************************************************************/
 $languageStrings = array(
-	'Accounts'                     => 'Aziende'              , 
-	'SINGLE_Accounts'              => 'Azienda'              , 
-	'LBL_ADD_RECORD'               => 'Aggiungi Azienda'     , 
-	'LBL_RECORDS_LIST'             => 'Lista Aziende'        , 
-	'LBL_ACCOUNT_INFORMATION'      => 'Informazioni Azienda' , 
+	'Accounts'                     => 'Clienti'              , 
+	'SINGLE_Accounts'              => 'Cliente'              , 
+	'LBL_ADD_RECORD'               => 'Aggiungi Cliente'     , 
+	'LBL_RECORDS_LIST'             => 'Lista Clienti'        , 
+	'LBL_ACCOUNT_INFORMATION'      => 'Informazioni Cliente' , 
 	'LBL_SHOW_ACCOUNT_HIERARCHY'   => 'Visualizza la gerarchia'    , 
 	'industry'                     => 'Industria'                   , 
-	'Account Name'                 => 'Nome Azienda'         , 
-	'Account No'                   => 'No Azienda'         , 
+	'Account Name'                 => 'Nome Cliente'         , 
+	'Account No'                   => 'No Cliente'         , 
 	'Website'                      => 'Sito Web'                    , 
 	'Ticker Symbol'                => 'Simbolo Ticker'              , 
 	'Member Of'                    => 'Membro di'                   , 
@@ -49,6 +49,6 @@ $languageStrings = array(
 );
 $jsLanguageStrings = array(
 	'LBL_RELATED_RECORD_DELETE_CONFIRMATION' => 'Sei sicuro di che voler eliminare?', 
-	'LBL_DELETE_CONFIRMATION'      => "L'eliminazione di questa organizzazione rimuoverà  le sue citazioni & opportunità  correlate. Sei sicuro di che voler eliminare questa organizzazione?", 
-	'LBL_MASS_DELETE_CONFIRMATION' => "L'eliminazione di questa organizzazione rimuoverà  le sue citazioni & opportunità  correlate. Sei sicuro di che voler eliminare questa organizzazione?", 
+	'LBL_DELETE_CONFIRMATION'      => "L'eliminazione di questa organizzazione rimuoverà  le sue citazioni & opportunit&agrave;  correlate. Sei sicuro di che voler eliminare questa organizzazione?", 
+	'LBL_MASS_DELETE_CONFIRMATION' => "L'eliminazione di questa organizzazione rimuoverà  le sue citazioni & opportunit&agrave;  correlate. Sei sicuro di che voler eliminare questa organizzazione?", 
 );

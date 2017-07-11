@@ -8,17 +8,17 @@
  * All Rights Reserved.
  ************************************************************************************/
 $languageStrings = array(
-	'LBL_TRANSFORM_OWNERSHIP'      => 'Transfer ownership'          , 
-	'SINGLE_Groups'                => 'Group'                       , // TODO: Review
-	'LBL_TO_OTHER_GROUP'           => 'To Other Group '             , 
-	'LBL_ADD_RECORD'               => 'Add Group'                   , // TODO: Review
-	'LBL_GROUP_NAME'               => 'Group Name'                  , // TODO: Review
-	'LBL_GROUP_MEMBERS'            => 'Group Members'               , // TODO: Review
-	'LBL_ADD_USERS_ROLES'          => 'Add Users, Roles...'         , // TODO: Review
-	'LBL_ROLEANDSUBORDINATE'       => 'Role and Subordinates'       , // TODO: Review
-	'RoleAndSubordinates'          => 'Role and Subordinates'       , // TODO: Review
+	'LBL_TRANSFORM_OWNERSHIP'      => 'Trasferisci possesso'          , 
+	'SINGLE_Groups'                => 'Gruppo'                       , // TODO: Review
+	'LBL_TO_OTHER_GROUP'           => 'Ad altro Gruppo '             , 
+	'LBL_ADD_RECORD'               => 'Aggiungi Gruppo'                   , // TODO: Review
+	'LBL_GROUP_NAME'               => 'Nome Gruppo'                  , // TODO: Review
+	'LBL_GROUP_MEMBERS'            => 'Membri del Gruppo'               , // TODO: Review
+	'LBL_ADD_USERS_ROLES'          => 'Aggiungi Utenti, Ruoli...'         , // TODO: Review
+	'LBL_ROLEANDSUBORDINATE'       => 'Ruoli e subordinati'       , // TODO: Review
+	'RoleAndSubordinates'          => 'Ruoli e subordinati'       , // TODO: Review
 );
 $jsLanguageStrings = array(
-	'JS_PLEASE_SELECT_ATLEAST_ONE_MEMBER_FOR_A_GROUP' => 'Please select atleast one member for a group', // TODO: Review
-	'JS_RECORD_DELETED_SUCCESSFULLY' => 'Group deleted successfully'  , // TODO: Review
+	'JS_PLEASE_SELECT_ATLEAST_ONE_MEMBER_FOR_A_GROUP' => 'Prego scegli almeno un membro per il Gruppo', // TODO: Review
+	'JS_RECORD_DELETED_SUCCESSFULLY' => 'Gruppo cancellato con successo'  , // TODO: Review
 );

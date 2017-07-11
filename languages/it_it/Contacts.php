@@ -10,13 +10,13 @@
 $languageStrings = array(
 	'Contacts'                     => 'Contatti'                    , 
 	'SINGLE_Contacts'              => 'Contatto'                    , 
-	'LBL_ADD_RECORD'               => 'Add Contact'                 , 
-	'LBL_RECORDS_LIST'             => 'Contacts List'               , 
+	'LBL_ADD_RECORD'               => 'Aggiungi Contatto'                 , 
+	'LBL_RECORDS_LIST'             => 'Elenco Contatti'               , 
 	'LBL_CONTACT_INFORMATION'      => 'Informazioni Contatto'       , 
 	'LBL_CUSTOMER_PORTAL_INFORMATION' => 'Informazioni Portale Clienti', 
 	'LBL_IMAGE_INFORMATION'        => 'Informazioni Immagine Contatto:', 
-	'LBL_COPY_OTHER_ADDRESS'       => 'Copy Other Address'          , // TODO: Review
-	'LBL_COPY_MAILING_ADDRESS'     => 'Copy Mailing Address'        , // TODO: Review
+	'LBL_COPY_OTHER_ADDRESS'       => 'Copia altro indirizzo'          , // TODO: Review
+	'LBL_COPY_MAILING_ADDRESS'     => 'Copia indirizzo di posta'        , // TODO: Review
 	'Office Phone'                 => 'Telefono Ufficio'            , 
 	'Home Phone'                   => 'Telefono Casa'               , 
 	'Title'                        => 'Titolo'                      , 
@@ -49,7 +49,7 @@ $languageStrings = array(
 	'User List'                    => 'Lista Utente'                , 
 	'Contact Id' => 'Contatto Id',
     'Support Start Date'           => 'Supporto Data di inizio'     ,
-    'Support End Date'             => 'Data di supporto End'        ,
+    'Support End Date'             => 'Supporto Data di fine'        ,
 );
 $jsLanguageStrings = array(
 );

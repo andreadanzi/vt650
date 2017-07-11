@@ -10,9 +10,9 @@
 $languageStrings = array(
 	'SINGLE_Quotes'                => 'Preventivo'                  , 
 	'LBL_EXPORT_TO_PDF'            => 'Esporta in PDF'              , 
-	'LBL_SEND_MAIL_PDF'            => 'Send Email with PDF'         , // TODO: Review
-	'LBL_ADD_RECORD'               => 'Add Quote'                   , 
-	'LBL_RECORDS_LIST'             => 'Lista Preventivi'            , 
+	'LBL_SEND_MAIL_PDF'            => 'Invia email con PDF'         , // TODO: Review
+	'LBL_ADD_RECORD'               => 'Aggiungi Preventivo'                   , 
+	'LBL_RECORDS_LIST'             => 'Elenco Preventivi'            , 
 	'LBL_QUOTE_INFORMATION'        => 'Informazioni Preventivo'     , 
 	'Quote No'                     => 'No. Preventivo'              , 
 	'Quote Stage'                  => 'Stadio Preventivo'           , 
@@ -20,7 +20,7 @@ $languageStrings = array(
 	'Inventory Manager'            => 'Responsabile inventario'     , 
 	'Accepted'                     => 'Accettato'                   , 
 	'Rejected'                     => 'Rifiutato'                   , 
-	 'Open Quotes'                  => 'Aperto Quotes',
+	 'Open Quotes'                  => 'Preventivi Aperti',
     
         //Taxes 
         'VAT'      => 'IVA', 
