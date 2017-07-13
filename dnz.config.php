@@ -4,4 +4,6 @@ $dnzProjectTypeMap = array(
     'Coflyer' => 'Template RC',
 );
 
+$dnzFieldLabel4MultiCompany = 'Gruppo Interno';
+
 ?>
