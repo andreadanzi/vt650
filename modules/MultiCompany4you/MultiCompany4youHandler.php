@@ -27,18 +27,21 @@ class MultiCompany4youHandler extends VTEventHandler {
                 //
                 $customRecordNumber = $customNumberingInstance->setModuleSeqNumber("increment", $modulename, '', '',$companyId);
                 if ($customRecordNumber) {
-                    $resColumn = $adb->pquery("SELECT columnname FROM vtiger_field WHERE tabid = ? AND uitype = 4", Array($tabid));
+                    $resColumn = $adb->pquery("SELECT columnname, tablename FROM vtiger_field WHERE tabid = ? AND uitype = 4", Array($tabid));
                     if ($adb->num_rows($resColumn) > 0) {
                         $rowCol = $adb->fetchByAssoc($resColumn);
-                        $adb->query("UPDATE " . $entityData->focus->table_name . "  SET " . $rowCol['columnname'] . "='" . $customRecordNumber . "' WHERE " . $entityData->focus->table_index . "=" . $entityData->focus->id);
+                        $adb->query("UPDATE " .  $rowCol['tablename'] . "  SET " . $rowCol['columnname'] . "='" . $customRecordNumber . "' WHERE " . $entityData->focus->table_index . "=" . $entityData->focus->id);
                         $customNumberingInstance->decrementStandardNumbering($modulename);
                     }
-                    // danzi.tn#13 - 20170713 - set Gruppo Interno based on MultiCompany
+		    // danzi.tn#13 - 20170713 - set Gruppo Interno based on MultiCompany
                     include('dnz.config.php');
-                    $resColumn = $adb->pquery("SELECT columnname FROM vtiger_field WHERE tabid = ? AND fieldlabel=?", Array($tabid, $dnzFieldLabel4MultiCompany));
+		    global $log;
+                    $resColumn = $adb->pquery("SELECT columnname , tablename FROM vtiger_field WHERE tabid = ? AND fieldlabel=?", Array($tabid, $dnzFieldLabel4MultiCompany));
                     if ($adb->num_rows($resColumn) > 0) {
                         $rowCol = $adb->fetchByAssoc($resColumn);
-                        $adb->query("UPDATE " . $entityData->focus->table_name . "  SET " . $rowCol['columnname'] . "='" . $companyname . "' WHERE " . $entityData->focus->table_index . "=" . $entityData->focus->id);
+                        $sqlUpdate = "UPDATE " .  $rowCol['tablename'] . "  SET " . $rowCol['columnname'] . "='" . $companyname . "' WHERE " . $entityData->focus->table_index . "=" . $entityData->focus->id;
+                        $log->debug("MultiCompany4youHandler SQL UPDATE ".$sqlUpdate);
+                        $adb->query($sqlUpdate);
                     }
                     // danzi.tn#13 - end
                 }
