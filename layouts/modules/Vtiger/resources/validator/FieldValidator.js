@@ -620,11 +620,11 @@ Vtiger_Base_Validator_Js('Vtiger_Currency_Validator_Js',{
 		var fieldValue = this.getFieldValue();
 		var fieldData = field.data();
 
-		if(fieldData.decimalSeperator == "'") fieldData.decimalSeperator = "''";
-		var strippedValue = fieldValue.replace(fieldData.decimalSeperator, '');
+		if(fieldData.decimalSeparator == "'") fieldData.decimalSeparator = "''";
+		var strippedValue = fieldValue.replace(fieldData.decimalSeparator, '');
 		var errorInfo;
 
-        var regex = new RegExp(fieldData.groupSeperator,'g');
+        var regex = new RegExp(fieldData.groupSeparator,'g');
         strippedValue = strippedValue.replace(regex, '');
 		//Note: Need to review if we should allow only positive values in currencies
 		/*if(strippedValue < 0){
