@@ -150,6 +150,31 @@ class MultiCompany4you_CustomRecordNumbering_Model extends Vtiger_Module_Model {
                 }
             }
         }
+        // danzi.tn#10 - 20170714 fix numbering assigned to groups
+        // maybe is a group id
+        global $log;
+        if(!$foundrole) {
+            $groups = $adb->pquery("SELECT vtiger_groups.groupname FROM  vtiger_groups WHERE groupid=?",array($user_id));
+            if ($adb->num_rows($groups) > 0) {
+                $log->debug("getCompanyRoleForUser user_id=".$user_id." is a Group ID");
+                require_once('include/utils/GetGroupUsers.php');
+                $group_roles = array();
+                $groupUsers = new GetGroupUsers();
+		        $groupUsers->getAllUsersInGroup($user_id);
+		        $usersInGroup = $groupUsers->group_users;
+		        foreach ($usersInGroup as $user) {
+		            $log->debug("call getCompanyRoleForUser again for User ID = ".$user." member of Group ID = ".$user_id);
+		            $group_roles[] = self::getCompanyRoleForUser($user);
+		        }
+		        $group_roles_count = array_count_values($group_roles);
+		        asort($group_roles_count );
+		        foreach ($group_roles_count as $groupRole=>$count) {
+		            $foundrole = $groupRole;
+		        }
+		        $log->debug("getCompanyRoleForUser found Role = ".$foundrole." for Group ID = ".$user_id);
+	        }
+        }
+        // danzi.tn#10 - end	
         return $foundrole;
     }
 
