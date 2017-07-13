@@ -129,7 +129,6 @@ Vtiger_List_Js("Calendar_List_Js",{
     },
 
     registerMarkAsHeldEvent : function(){
-	    alert("hh");
         var thisInstance = this;
 		var listViewContentDiv = this.getListViewContentContainer();
 		listViewContentDiv.on('click','.markAsHeld',function(e){
@@ -182,7 +181,6 @@ Vtiger_List_Js("Calendar_List_Js",{
     },
 
     registerEvents : function(){
-	     alert("ww");
         this._super();
         this.registerHoldFollowupOnEvent();
         this.registerMarkAsHeldEvent();
