@@ -940,12 +940,15 @@ function insertIntoRecurringTable(& $recurObj)
 	 * returns the array with table names and fieldnames storing relations between module and this module
 	 */
 	function setRelationTables($secmodule){
+    	// danzi.tn#6 - 20170718 - add Project as related entity
 		$rel_tables = array (
 			"Contacts" => array("vtiger_cntactivityrel"=>array("activityid","contactid"),"vtiger_activity"=>"activityid"),
 			"Leads" => array("vtiger_seactivityrel"=>array("activityid","crmid"),"vtiger_activity"=>"activityid"),
 			"Accounts" => array("vtiger_seactivityrel"=>array("activityid","crmid"),"vtiger_activity"=>"activityid"),
 			"Potentials" => array("vtiger_seactivityrel"=>array("activityid","crmid"),"vtiger_activity"=>"activityid"),
+			"Project" => array("vtiger_seactivityrel"=>array("activityid","crmid"),"vtiger_activity"=>"activityid"),
 		);
+		// danzi.tn#6 end
 		return $rel_tables[$secmodule];
 	}
 
