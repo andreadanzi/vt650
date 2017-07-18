@@ -41,7 +41,7 @@ class Project_DetailView_Model extends Vtiger_DetailView_Model {
 					'linklabel' => 'LBL_MILESTONES',
 					'linkName'	=> $projectMileStoneInstance->getName(),
 					'linkurl' => 'module='.$this->getModuleName().'&view=Detail&record='.$this->getRecord()->getId().
-							'&relatedModule=ProjectMilestone&mode=showRelatedRecords&page=1&limit=8',
+							'&relatedModule=ProjectMilestone&mode=showRelatedRecords&page=1&limit=8&orderby=projectmilestonedate',
 					'action'	=>	($createPermission == true) ? array('Add') : array(),
 					'actionURL' =>	$projectMileStoneInstance->getQuickCreateUrl()
 			);
@@ -55,7 +55,7 @@ class Project_DetailView_Model extends Vtiger_DetailView_Model {
 					'linklabel' => 'LBL_TASKS',
 					'linkName'	=> $projectTaskInstance->getName(),
 					'linkurl' => 'module='.$this->getModuleName().'&view=Detail&record='.$this->getRecord()->getId().
-							'&relatedModule=ProjectTask&mode=showRelatedRecords&page=1&limit=8',
+							'&relatedModule=ProjectTask&mode=showRelatedRecords&page=1&limit=8&orderby=startdate',
 					'action'	=>	($createPermission == true) ? array('Add') : array(),
 					'actionURL' =>	$projectTaskInstance->getQuickCreateUrl()
 			);
