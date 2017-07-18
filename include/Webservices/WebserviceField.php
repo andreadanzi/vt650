@@ -261,13 +261,16 @@ class WebserviceField{
 			}
 
 			//to handle hardcoding done for Calendar module todo activities.
+			// danzi.tn#6 - 20170718 - add Project as related entity
 			if($this->tabid == 9 && $this->fieldName =='parent_id'){
 				$referenceTypes[] = 'Invoice';
 				$referenceTypes[] = 'Quotes';
 				$referenceTypes[] = 'PurchaseOrder';
 				$referenceTypes[] = 'SalesOrder';
 				$referenceTypes[] = 'Campaigns';
+				$referenceTypes[] = 'Project';
 			}
+			// danzi.tn#6 end
 
 			global $current_user;
 			$types = vtws_listtypes(null, $current_user);
