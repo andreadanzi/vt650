@@ -162,7 +162,7 @@
 		{/if}
 		{* Summary View Tasks Widget Ends Here *}
 
-        <!-- danzi.tn# - 20170718 removed Summary View Tasks progress Widget -->
+        <!-- danzi.tn#14 - 20170718 - removed Summary View Tasks progress Widget -->
 
 		{* Summary View Document Widget*}
 		{if $DOCUMENT_WIDGET_MODEL}
