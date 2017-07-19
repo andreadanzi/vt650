@@ -50,6 +50,7 @@ $languageStrings = array(
 	'Contact Id' => 'Contatto Id',
     'Support Start Date'           => 'Supporto Data di inizio'     ,
     'Support End Date'             => 'Supporto Data di fine'        ,
+	'Secondary Email' => 'Email Privata',
 );
 $jsLanguageStrings = array(
 );
