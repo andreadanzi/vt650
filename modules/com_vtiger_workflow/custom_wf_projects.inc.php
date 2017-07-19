@@ -2,7 +2,7 @@
 require_once('include/database/PearDatabase.php');
 require_once 'include/utils/utils.php';
 // danzi.tn#9 - 20170705 - custom function for project creation based on template
-
+// danzi.tn#17 - 20170719 . skipping 'startdate','targetenddate'
 /*
 TABID
 -- 42 Project
@@ -46,7 +46,7 @@ function customProjectFromTemplate($entity){
 	
 			        if( !empty($templateFocus->column_fields[$fieldName] ) &&
 			            empty($currentFocus->column_fields[$fieldName] ) && 
-			            ! in_array($fieldName, array('projectname','assigned_user_id','projecttype','createdtime','modifiedtime','linktoaccountscontacts') )  ) {
+			            ! in_array($fieldName, array('projectname','assigned_user_id','projecttype','createdtime','modifiedtime','linktoaccountscontacts','startdate','targetenddate') )  ) {
 				        // $currentRecordModel->set($fieldName, $templateFieldModel->getDBInsertValue($fieldValue));
 				        $currentFocus->column_fields[$fieldName] = $fieldValue;
 				        $log->debug("customProjectFromTemplate.templateFieldList field: ".$fieldName." set to " .$fieldValue);
@@ -57,28 +57,37 @@ function customProjectFromTemplate($entity){
 			       		       
 		    }
 		    // set dates accordingly to..
-		    
+
+		    // START DATE
+		    // danzi.tn#17 - 20170719 - fix when end date is selected
 		    $projectStartdate = $currentFocus->column_fields["startdate"];
-		    $projectEnddate = $currentFocus->column_fields["targetenddate"];
+		    $projectEnddate = $currentFocus->column_fields['targetenddate'];
 		    $templateStartdate = $templateFocus->column_fields["startdate"];
 		    $log->debug("customProjectFromTemplate: templateStartdate=".$templateStartdate." type is ".gettype($templateStartdate));
-		    $pStart = strtotime($projectStartdate);
+		    
 		    $tStart = strtotime($templateStartdate);
-		    $targetenddate = $templateFocus->column_fields["targetenddate"];
-		    $curTargetenddate = $currentFocus->column_fields['targetenddate'];
-		    if( !empty($targetenddate) ) {
-    		    $rTarget = strtotime($targetenddate);
+		    $pStart = strtotime($projectStartdate);
+		    
+		    $templateTargetenddate = $templateFocus->column_fields["targetenddate"];
+		    if( !empty($templateTargetenddate) ) {
+    		    $rTarget = strtotime($templateTargetenddate);
     		    $projectDuration = $rTarget - $tStart;
     		    if( empty($projectStartdate) && !empty($projectEnddate)  ) {
+    		        $log->debug("customProjectFromTemplate: projectStartdate is empty and projectEnddate=".$projectEnddate);
     		        $pEnd = strtotime($projectEnddate);
-    		        $pStart = $pEnd - $projectDuration;   
-    		        $projectStartdate = date("Y-m-d",$pStart);
-	    	        $currentFocus->column_fields['startdate'] = $projectStartdate;
+    		        $newStart = $pEnd - $projectDuration; 
+    		        $pStart = $newStart;
+        		    $log->debug("customProjectFromTemplate: newStart = ". date("Y-m-d",$newStart));
+	    	        $currentFocus->column_fields['startdate'] = date("Y-m-d",$newStart);
     		    } else {
+    		        $log->debug("customProjectFromTemplate: projectStartdate = ". $projectStartdate  ." and projectEnddate=".$projectEnddate);
+		            $pStart = strtotime($projectStartdate);
         		    $newTarget = $pStart + $projectDuration;
+        		    $log->debug("customProjectFromTemplate: newTarget = ". date("Y-m-d",$newTarget));
 	    	        $currentFocus->column_fields['targetenddate'] = date("Y-m-d",$newTarget);
     	        }
 		    }
+		    // danzi.tn#17 end
 		    $log->debug("customProjectFromTemplate.templateFieldList column_names = ".print_r($column_names,True));
 		    $relatedQuery = "SELECT
                                 vtiger_crmentityrel.relcrmid,
@@ -91,7 +100,7 @@ function customProjectFromTemplate($entity){
                                 vtiger_crmentityrel on vtiger_crmentityrel.crmid  = vtiger_project.projectid 
                                 WHERE
                                 vtiger_crmentityrel.relmodule IN ('ProjectTask','ProjectMilestone')
-                                AND vtiger_project.projectid = ?";
+                                AND vtiger_project.projectid = ? ORDER BY vtiger_crmentityrel.relmodule, vtiger_crmentityrel.relcrmid";
 		    $relatedRes = $adb->pquery($relatedQuery , array($templateId));
     		$noOfRows = $adb->num_rows($relatedRes);
 
