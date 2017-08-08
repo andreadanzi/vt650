@@ -8,16 +8,16 @@
  * All Rights Reserved.
  ************************************************************************************/
 $languageStrings = array(
-	'SINGLE_ProjectMilestone'	=>	"Milestone",
-	'LBL_ADD_RECORD'	=>	"Aggiungi Milestone di Progetto",
-	'LBL_RECORDS_LIST'	=>	"Lista Milestones",
+	'SINGLE_ProjectMilestone'	=>	"Scadenza",
+	'LBL_ADD_RECORD'	=>	"Aggiungi Scadenza di Progetto",
+	'LBL_RECORDS_LIST'	=>	"Lista Scadenze",
 	'LBL_PROJECTS_LIST'	=>	"Lista Progetti",
-	'LBL_TASKS_LIST'	=>	"Lista Tasks",
-	'LBL_MILESTONES_LIST'	=>	"Lista Milestones",
-	'LBL_PROJECT_MILESTONE_INFORMATION'	=>	"Dettagli Milestone",
-	'Project Milestone Name'	=>	"Nome Milestone",
-	'Milestone Date'	=>	"Data Milestone",
-	'Project Milestone No'	=>	"Numero Milestone",
+	'LBL_TASKS_LIST'	=>	"Lista Attivit&agrave;",
+	'LBL_MILESTONES_LIST'	=>	"Lista Scadenze",
+	'LBL_PROJECT_MILESTONE_INFORMATION'	=>	"Dettagli Scadenza",
+	'Project Milestone Name'	=>	"Nome Scadenza",
+	'Milestone Date'	=>	"Data Scadenza",
+	'Project Milestone No'	=>	"Numero Scadenza",
 	//picklist values
 	'administrative' => 'Amministrativo',
     'operative' => 'Operativo',

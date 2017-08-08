@@ -16,7 +16,7 @@ $languageStrings = array(
 	
 	'LBL_TEMPLATE_NAME' => 'Nome modello',
 	'LBL_DESCRIPTION' => 'Descrizione',
-	'LBL_SUBJECT' => 'Soggetto',
+	'LBL_SUBJECT' => 'Oggetto',
 	'LBL_GENERAL_FIELDS' => 'Campi Generale',
 	'LBL_SELECT_FIELD_TYPE' => 'Selezionare il tipo di campo',
 	
