@@ -176,11 +176,9 @@
 						<span class="span9"><h4>{vtranslate("Email Messages",$MODULE_NAME)}</h4></span>
 						<span class="span3">
 							<span class=" pull-right">
-								{if $EMAIL_WIDGET_MODEL->get('action')}
-									<button class="btn addButton" id="createProjectMileStone" type="button" data-url="{$EMAIL_WIDGET_MODEL->get('actionURL')}" data-parent-related-field="projectid">
-										<strong>{vtranslate('LBL_ADD',$MODULE_NAME)}</strong>
-									</button>
-								{/if}
+									<button type="button" class="btn btn-success pull-right addButton createRecord" data-name="parent_id" name="composeEmail">
+									    <i class="fa fa-plus" title="{vtranslate('LBL_ADD',$MODULE_NAME)}"></i>
+								    </button>
 							</span>
 						</span>
 						<input type="hidden" name="relatedModule" value="{$EMAIL_WIDGET_MODEL->get('linkName')}" />
