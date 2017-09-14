@@ -50,8 +50,10 @@ function notifyProjectTask($entity){
 	    
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$rootDirectory =  vglobal('root_directory');
-	    $fromEmail = $currentUserModel->get('email1');
-	    $userName = $currentUserModel->getName();
+		// todo - danzi.tn#19 - 20170907 - prendere fromEmail e userName da Multicompany o configurazione
+		// danzi.tn#21 - 20170908 - User sending ProjectTask notifications 
+	    $fromEmail = "assistenza@recapitocerto.it";
+	    $userName = "team.recapito.certo";
         $log->debug("userName=".$userName);
         $log->debug("fromEmail=".$fromEmail);
         

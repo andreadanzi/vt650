@@ -23,6 +23,8 @@
 		{assign var=COMMENTS_WIDGET_MODEL value=$DETAIL_VIEW_WIDGET}
 	{elseif ($DETAIL_VIEW_WIDGET->getLabel() eq 'LBL_UPDATES')}
 		{assign var=UPDATES_WIDGET_MODEL value=$DETAIL_VIEW_WIDGET}
+	{elseif ($DETAIL_VIEW_WIDGET->getLabel() eq 'Emails')}
+		{assign var=EMAIL_WIDGET_MODEL value=$DETAIL_VIEW_WIDGET}
 	{/if}
 {/foreach}
 
@@ -163,7 +165,35 @@
 		{* Summary View Tasks Widget Ends Here *}
 
         <!-- danzi.tn#14 - 20170718 - removed Summary View Tasks progress Widget -->
-
+        
+        <!-- danzi.tn#20 - 20170914 - added related Email Widget on mazzy -->
+        {* Summary View EMAIL Widget*}
+		{if $EMAIL_WIDGET_MODEL}
+		
+		    <div class="summaryWidgetContainer">
+				<div class="widgetContainer_mileStone" data-url="{$EMAIL_WIDGET_MODEL->getUrl()}" data-name="{$EMAIL_WIDGET_MODEL->getLabel()}">
+					<div class="widget_header row-fluid">
+						<span class="span9"><h4>{vtranslate("Email Messages",$MODULE_NAME)}</h4></span>
+						<span class="span3">
+							<span class=" pull-right">
+								{if $EMAIL_WIDGET_MODEL->get('action')}
+									<button class="btn addButton" id="createProjectMileStone" type="button" data-url="{$EMAIL_WIDGET_MODEL->get('actionURL')}" data-parent-related-field="projectid">
+										<strong>{vtranslate('LBL_ADD',$MODULE_NAME)}</strong>
+									</button>
+								{/if}
+							</span>
+						</span>
+						<input type="hidden" name="relatedModule" value="{$EMAIL_WIDGET_MODEL->get('linkName')}" />
+					</div>
+					<div class="widget_contents">
+					</div>
+				</div>
+			</div>
+		
+		
+		{/if}
+		<!-- danzi.tn#20 - end -->
+		
 		{* Summary View Document Widget*}
 		{if $DOCUMENT_WIDGET_MODEL}
 			<div class="summaryWidgetContainer">

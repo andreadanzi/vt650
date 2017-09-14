@@ -61,7 +61,21 @@ class Project_DetailView_Model extends Vtiger_DetailView_Model {
 			);
 		}
         // danzi#14 - end
-
+		
+		// danzi.tn#20 - 20170914 - added related Email Widget
+		$emailsInstance = Vtiger_Module_Model::getInstance('Emails');
+		if($userPrivilegesModel->hasModuleActionPermission($emailsInstance->getId(), 'DetailView')) {
+			$createPermission = $userPrivilegesModel->hasModuleActionPermission($emailsInstance->getId(), 'EditView');
+			$widgets[] = array(
+					'linktype' => 'DETAILVIEWWIDGET',
+					'linklabel' => 'Emails',
+					'linkName'	=> $emailsInstance->getName(),
+					'linkurl' => 'module='.$this->getModuleName().'&view=Detail&record='.$this->getRecord()->getId().
+							'&relatedModule=Emails&mode=showRelatedRecords&page=1&limit=8'
+			);
+		}
+		// danzi.tn#20 - end
+		
 		$documentsInstance = Vtiger_Module_Model::getInstance('Documents');
 		if($userPrivilegesModel->hasModuleActionPermission($documentsInstance->getId(), 'DetailView')) {
 			$createPermission = $userPrivilegesModel->hasModuleActionPermission($documentsInstance->getId(), 'EditView');

@@ -444,7 +444,16 @@ class Project extends CRMEntity {
      */
     function delete_related_module($module, $crmid, $with_module, $with_crmid) {
          if (!in_array($with_module, array('ProjectMilestone', 'ProjectTask'))) {
-             parent::delete_related_module($module, $crmid, $with_module, $with_crmid);
+             
+             if(in_array($with_module, array('Emails')) ){
+                $sql = 'DELETE FROM vtiger_seactivityrel WHERE activityid=? AND crmid = ?';
+        		$this->db->pquery($sql, array($with_crmid, $crmid) );
+                $sql = 'DELETE FROM vtiger_mailmanager_mailrel WHERE emailid =? AND crmid = ?';
+        		$this->db->pquery($sql, array($with_crmid, $crmid) );
+             } else {
+                parent::delete_related_module($module, $crmid, $with_module, $with_crmid);
+             }
+             
              return;
          }
         $destinationModule = vtlib_purify($_REQUEST['destination_module']);
@@ -634,10 +643,10 @@ class Project extends CRMEntity {
 		$log->debug("Entering get_activities(".$id.") method ...");
 		$this_module = $currentModule;
 
-	$related_module = vtlib_getModuleNameById($rel_tab_id);
+	    $related_module = vtlib_getModuleNameById($rel_tab_id);
 		require_once("modules/$related_module/Activity.php");
 		$other = new Activity();
-	vtlib_setup_modulevars($related_module, $other);
+	    vtlib_setup_modulevars($related_module, $other);
 		$singular_modname = vtlib_toSingular($related_module);
 
 		$parenttab = getParentTab();
@@ -738,7 +747,6 @@ class Project extends CRMEntity {
 		return getHistory('Project',$query,$id);
 	}
 	// danzi.tn#6 end
-}   
     // danzi.tn#16 - 20170718 - add get_emails for Project
     function get_emails($id, $cur_tab_id, $rel_tab_id, $actions=false) {
 		global $log, $singlepane_view,$currentModule,$current_user;
@@ -796,4 +804,5 @@ class Project extends CRMEntity {
 		return $return_value;
 	}
     // danzi.tn#16 end
+}   
 ?>

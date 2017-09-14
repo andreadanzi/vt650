@@ -35,7 +35,7 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 	 * List of modules used to match the Email address
 	 * @var Array
 	 */
-	static $MODULES = array ( 'Contacts', 'Accounts', 'Leads');
+	static $MODULES = array ( 'Contacts', 'Accounts', 'Leads', 'Project');
 
 	/**
 	 * Process the request to perform relationship operations
@@ -46,21 +46,26 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 	 * @return boolean
 	 */
 	public function process(Vtiger_Request $request) {
+        global $log;
+        $log->debug("MailManager.views.Relation->process started");
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$response = new Vtiger_Response(true);
 		$viewer = $this->getViewer($request);
 
 		if ('find' == $this->getOperationArg($request)) {
 			$this->skipConnection = true; // No need to connect to mailbox here, improves performance
-
+			// danzi.tn#20 - 20170913
+            $log->debug("MailManager_Relation_View::process _msguid=".$_REQUEST['_msguid']);
 			// Check if the message is already linked.
-			$linkedto = MailManager_Relate_Action::associatedLink($request->get('_msguid'));
+			$linkedto = MailManager_Relate_Action::associatedLink($_REQUEST['_msguid']);
+			// danzi.tn#20 - 2
+			$log->debug("MailManager_Relation_View::process linkedto=".$linkedto);
 			// If the message was not linked, lookup for matching records, using FROM address unless it is in the sent folder
-      $folder=$request->get('_folder');
-      if ($folder=="Sent"){
-        $contacts=$request->get('_msendto');
-      }else{
-			  $contacts=$request->get('_mfrom');
+            $folder=$request->get('_folder');
+            if ($folder == "Sent"){
+                  $contacts = $request->get('_msendto');
+            }else{
+                  $contacts = $request->get('_mfrom');
 			}
 			if (empty($linkedto)) {
 				$results = array();
@@ -93,7 +98,22 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 		} else if ('link' == $this->getOperationArg($request)) {
 
 			$linkto = $request->get('_mlinkto');
+            $log->debug("MailManager.views.Relation->process link linkto = ". $linkto ); // empty for Project se non c'è già un link ad un progetto
+            
 			$foldername = $request->get('_folder');
+            $log->debug("MailManager.views.Relation->process link foldername = ". $foldername );
+            
+			$linkModule = $request->get('_mlinktotype');
+			// danzi.tn#20 - 20170913 - Link project to MailManager
+            $log->debug("MailManager.views.Relation->process link linkModule = ". $linkModule );
+            if(  $linkModule == "Project" ) {
+               $mailproject_id = $request->getRaw('mailproject_id');
+               $log->debug("MailManager.views.Relation->process link mailproject_id = ". $mailproject_id );
+               $log->debug("MailManager.views.Relation->process link mailproject_name = ". $request->getRaw('mailproject_name') );
+               $linkto = $mailproject_id;
+            }
+            // danzi.tn#20 - end 
+            
 			$connector = $this->getConnector($foldername);
 
 			// This is to handle larger uploads
@@ -104,18 +124,27 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 			$mail->attachments(); // Initialize attachments
 
 			$linkedto = MailManager_Relate_Action::associate($mail, $linkto);
-
-			$viewer->assign('LINK_TO_AVAILABLE_ACTIONS', $this->linkToAvailableActions());
-			$viewer->assign('ALLOWED_MODULES', $this->getCurrentUserMailManagerAllowedModules());
-			$viewer->assign('LINKEDTO', $linkedto);
-			$viewer->assign('MSGNO', $request->get('_msgno'));
-			$viewer->assign('FOLDER', $foldername);
-			$response->setResult( array( 'ui' => $viewer->view( 'Relationship.tpl', 'MailManager', true ) ) );
+            
+            // danzi.tn#20 - 20170913 - Link project to MailManager     
+            if(  $linkModule == "Project" ) {
+                $response->setResult( array( 'linkto' =>$linkto,'linktotype' => $linkModule) );
+            } else {       
+			    $viewer->assign('LINK_TO_AVAILABLE_ACTIONS', $this->linkToAvailableActions());
+			    $viewer->assign('ALLOWED_MODULES', $this->getCurrentUserMailManagerAllowedModules());
+			    $viewer->assign('LINKEDTO', $linkedto);
+			    $viewer->assign('MSGNO', $request->get('_msgno'));
+			    $viewer->assign('FOLDER', $foldername);
+			    $response->setResult( array( 'ui' => $viewer->view( 'Relationship.tpl', 'MailManager', true ) ) );
+			}
 
 		} else if ('create_wizard' == $this->getOperationArg($request)) {
+            $log->debug("MailManager.views.Relation->process create_wizard");
 			$moduleName = $request->get('_mlinktotype');
+            $log->debug("MailManager.views.Relation->process create_wizard moduleName = ". $moduleName );
 			$parent =  $request->get('_mlinkto');
+            $log->debug("MailManager.views.Relation->process create_wizard parent = ". $parent );
 			$foldername = $request->get('_folder');
+            $log->debug("MailManager.views.Relation->process create_wizard foldername = ". $foldername );
 
 			$connector = $this->getConnector($foldername);
 			$mail = $connector->openMail($request->get('_msgno'));
@@ -139,9 +168,13 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 			$response = false;
 
 		} else if ('create' == $this->getOperationArg($request)) {
+            $log->debug("MailManager.views.Relation->process create");
 			$linkModule = $request->get('_mlinktotype');
+            $log->debug("MailManager.views.Relation->process create linkModule = ". $linkModule );
 			$parent =  $request->get('_mlinkto');
+            $log->debug("MailManager.views.Relation->process create parent = ". $parent ); // empty for Project se non c'è già un link ad un progetto
 			$foldername = $request->get('_folder');
+            $log->debug("MailManager.views.Relation->process create foldername = ". $foldername );
 
 			if(!empty($foldername)) {
 				// This is to handle larger uploads
@@ -234,11 +267,11 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 									$recordModel->set($referenceFieldName, $this->setParentForHelpDesk($parent, $from));
 									break;
                 
-				case 'Project' :   $from = $mail->from();
-									if ($parent) {
-										$referenceFieldName = 'linktoaccountscontacts';
-									}
-									$recordModel->set($referenceFieldName, $this->setParentForHelpDesk($parent, $from));
+				case 'Project' :    $from = $mail->from();
+				                    $mailproject_id = $request->getRaw('mailproject_id');
+                    				$log->debug("MailManager.views.Relation->process mailproject_id = ". $request->getRaw('mailproject_id') );
+                    				$log->debug("MailManager.views.Relation->process mailproject_name = ". $request->getRaw('mailproject_name') );
+									
 									break;
                 // danzi.tn@20170307e
 			}
@@ -319,6 +352,7 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 			$viewer->view( 'MailManagerCommentWidget.tpl', 'MailManager' );
 			$response = false;
 		}
+        $log->debug("MailManager.views.Relation->process terminated");
 		return $response;
 	}
 
@@ -382,7 +416,8 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 	 * @return Array
 	 */
 	public function getCurrentUserMailManagerAllowedModules() {
-		$moduleListForCreateRecordFromMail = array('Contacts', 'Accounts', 'Leads', 'HelpDesk', 'Calendar');
+	    // danzi.tn@20170829 added link to 'Project','Potentials'
+		$moduleListForCreateRecordFromMail = array('Contacts', 'Accounts', 'Leads', 'HelpDesk', 'Calendar','Project','Potentials');
 
 		foreach($moduleListForCreateRecordFromMail as $module) {
 			if(MailManager::checkModuleWriteAccessForCurrentUser($module)) {
@@ -451,20 +486,44 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 		$currentUserModel = vglobal('current_user');
 		//could be to multiple email addresses
 		$results = array();
-		foreach(explode(",",$emails) as $email){
-			$query = $this->buildSearchQuery($module, $email, 'EMAIL');
-			$qresults = vtws_query( $query, $currentUserModel );
-			$describe = $this->ws_describe($module);
-			$labelFields = explode(',', $describe['labelFields']);
-			foreach($qresults as $qresult) {
-				$labelValues = array();
-				foreach($labelFields as $fieldname) {
-					if(isset($qresult[$fieldname])) $labelValues[] = $qresult[$fieldname];
-				}
-				$ids = vtws_getIdComponents($qresult['id']);
-				$results[] = array( 'wsid' => $qresult['id'], 'id' => $ids[1], 'label' => implode(' ', $labelValues));
-			}
+		// danzi.tn#20 - 20170913 - Link project to MailManager
+		if($module=='Project'){
+		    global $log, $adb;
+	        $sSQL="SELECT CONCAT(vtiger_ws_entity.id,  'x',vtiger_project.projectid) as wsid, vtiger_project.projectid as id, vtiger_project.projectname as label
+                    FROM
+                    vtiger_seactivityrel
+                    JOIN vtiger_emaildetails on vtiger_emaildetails.emailid = vtiger_seactivityrel.activityid
+                    JOIN vtiger_project on vtiger_project.projectid = vtiger_seactivityrel.crmid
+                    JOIN vtiger_crmentity on vtiger_crmentity.crmid = vtiger_project.projectid AND vtiger_crmentity.deleted = 0
+                    JOIN vtiger.vtiger_ws_entity ON vtiger_ws_entity.name = 'Project'
+                    WHERE vtiger_emaildetails.from_email = ?";
+            $log->debug("MailManager_Relation_View::lookupModuleRecordsWithEmail sSQL =".$sSQL);
+		    foreach(explode(",",$emails) as $email){
+                $log->debug("MailManager_Relation_View::lookupModuleRecordsWithEmail search for ".$email );
+                $related_projects = $adb->pquery($sSQL,array($email));
+                while($rec_related_project = $adb->fetchByAssoc($related_projects)){
+                    $log->debug("MailManager_Relation_View::lookupModuleRecordsWithEmail found ".$rec_related_project["label"]);
+                    // danzi.tn#20 $results[] = array( 'wsid' => $rec_related_project['wsid'], 'id' => $rec_related_project['id'], 'label' =>$rec_related_project["label"] );
+                }
+            }
+            $log->debug("MailManager_Relation_View::lookupModuleRecordsWithEmail for Project Completed " );
+        } else {
+		    foreach(explode(",",$emails) as $email){
+			    $query = $this->buildSearchQuery($module, $email, 'EMAIL');
+			    $qresults = vtws_query( $query, $currentUserModel );
+			    $describe = $this->ws_describe($module);
+			    $labelFields = explode(',', $describe['labelFields']);
+			    foreach($qresults as $qresult) {
+				    $labelValues = array();
+				    foreach($labelFields as $fieldname) {
+					    if(isset($qresult[$fieldname])) $labelValues[] = $qresult[$fieldname];
+				    }
+				    $ids = vtws_getIdComponents($qresult['id']);
+				    $results[] = array( 'wsid' => $qresult['id'], 'id' => $ids[1], 'label' => implode(' ', $labelValues));
+			    }
+		    }
 		}
+		// danzi.tn#20 end
 		return $results;
 	}
         

@@ -37,4 +37,5 @@ $languageStrings = array(
 	'Date & Time Sent'             => 'Data invio'                   , // TODO: Review
     'Time Start'                   => 'Ora inizio'                       ,
     'LBL_EMAIL_INFORMATION' => 'E-mail Informazioni',
+	'Email Messages'               => 'Messaggi Email'                , // TODO: Review
 );
