@@ -85,6 +85,10 @@ class Emails extends CRMEntity {
 				$actid = $_REQUEST['record'];
 			}
 			$parentid = $_REQUEST['parent_id'];
+			// danzi.tn#20 - 20170914 - send/save e-mail from Project
+			$selected_ids = $_REQUEST['selected_ids'];
+			$selected_ids_array = json_decode($selected_ids);
+			$mycrmid_list = array();
 			if ($_REQUEST['module'] != 'Emails' && $_REQUEST['module'] != 'Webmails') {
 				if (!$parentid) {
 					$parentid = $adb->getUniqueID('vtiger_seactivityrel');
@@ -107,9 +111,18 @@ class Emails extends CRMEntity {
 						$mysql = 'insert into vtiger_seactivityrel values(?,?)';
 					}
 					$params = array($mycrmid, $actid);
+					$mycrmid_list[] = $mycrmid;
 					$adb->pquery($mysql, $params);
 				}
 			}
+			$crmid_diff = array_diff( $selected_ids_array, $mycrmid_list);
+		    $del_q = 'delete from vtiger_seactivityrel where crmid=? and activityid=?';
+			$ins_q = 'insert into vtiger_seactivityrel values(?,?)';
+			foreach ($crmid_diff as $diff_id) {
+				$adb->pquery( $del_q, array($diff_id, $actid) );
+				$adb->pquery( $ins_q, array($diff_id, $actid) );
+            }
+            // danzi.tn#20 - 20170914e
 		} else {
 			if (isset($this->column_fields['parent_id']) && $this->column_fields['parent_id'] != '') {
 				$adb->pquery("DELETE FROM vtiger_seactivityrel WHERE crmid = ? AND activityid = ? ",
